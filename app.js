@@ -28,11 +28,14 @@
         // Add tiles to DOM
 
     // Remove form from screen
-
+    function hideForm() {
+        document.getElementById('dino-compare').style.display = 'none';
+    }
 
 // On button click, prepare and display infographic
 
 const dinoFormSubmitButton = document.querySelector('#dino-compare #btn');
 dinoFormSubmitButton.onclick = function() {
+    hideForm();
     console.log('I am here 2');
 };
