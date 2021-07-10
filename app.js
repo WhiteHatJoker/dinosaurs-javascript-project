@@ -1,6 +1,16 @@
 
     // Create Dino Constructor
+    function Dino() {
+        
+    }
 
+    fetch('./dino.json')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      console.log(data.Dinos[0]);
+    })
+    .catch(err => console.error(err));
  
 
     // Create Dino Objects
