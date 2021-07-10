@@ -1,19 +1,31 @@
 
     // Create Dino Constructor
-    function Dino() {
-        
+    function Dino(species, height, weight, when, where, facts) {
+        this.species = species;
+        this.height = height;
+        this.weight = weight;
+        this.when = when;
+        this.where = where;
+        this.facts = facts;
     }
+    
+    // Create Dino Objects
+
+    let dinos = [];
 
     fetch('./dino.json')
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      console.log(data.Dinos[0]);
+        console.log(data)
+        data.Dinos.map(dino => {
+            Dino(dino.spec)
+        });
+        console.log(data.Dinos[0]);
     })
     .catch(err => console.error(err));
  
 
-    // Create Dino Objects
+    
 
 
     // Create Human Object
