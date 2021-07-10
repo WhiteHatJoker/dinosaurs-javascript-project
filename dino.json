@@ -1,0 +1,90 @@
+{
+    "Dinos": [
+        {
+            "species": "Triceratops",
+            "weight": 13000,
+            "height": 114,
+            "diet": "herbavor",
+            "where": "North America",
+            "when": "Late Cretaceous",
+            "fact": ["First discovered in 1889 by Othniel Charles Marsh", 
+                "The meaning of Triceratops is three-horned face",
+                "They weighed 5 tons (about as much as a truck)"]
+        },
+        {
+            "species": "Tyrannosaurus Rex",
+            "weight": 11905,
+            "height": 144,
+            "diet": "carnivor",
+            "where": "North America",
+            "when": "Late Cretaceous",
+            "fact": ["The largest known skull measures in at 5 feet long",
+                "They could sprint up to 20 mph (32 kph)",
+                "Tyrannosaurus Rex means 'Tyrant Lizard'."]
+        },
+        {
+            "species": "Anklyosaurus",
+            "weight": 10500,
+            "height": 55,
+            "diet": "herbavor",
+            "where": "North America",
+            "when": "Late Cretaceous",
+            "fact": ["Anklyosaurus survived for approximately 135 million years.",
+                "Scientists estimate it reached a length of around 9 metres (30 feet) and a weight of around 6000 kg (13000 lb)",
+                "The signature feature of Ankylosaurus was its body armor"]
+        },
+        {
+            "species": "Brachiosaurus",
+            "weight": 70000,
+            "height": "372",
+            "diet": "herbavor",
+            "where": "North America",
+            "when": "Late Jurasic",
+            "fact": ["An asteroid was named 9954 Brachiosaurus in 1991.",
+                "The meaning of their name is arm reptiles",
+                "They weighed about 40 tons (40,000kg)"]
+        },
+        {
+            "species": "Stegosaurus",
+            "weight": 11600,
+            "height": 79,
+            "diet": "herbavor",
+            "where": "North America, Europe, Asia",
+            "when": "Late Jurasic to Early Cretaceous",
+            "fact": ["The Stegosaurus had between 17 and 22 seperate places and flat spines.",
+                "Stegosaurus Had a Brain the Size of a Walnut",
+                "Stegosaurus Was Closely Related to Ankylosaurus"]
+        },
+        {
+            "species": "Elasmosaurus",
+            "weight": 16000,
+            "height": 59,
+            "diet": "carnivor",
+            "where": "North America",
+            "when": "Late Cretaceous",
+            "fact": ["Elasmosaurus was a marine reptile first discovered in Kansas.",
+                "The meaning of its name is Thin Plated Lizard",
+                "They were slow swimmers"]
+        },
+        {
+            "species": "Pteranodon",
+            "weight": 44,
+            "height": 20,
+            "diet": "carnivor",
+            "where": "North America",
+            "when": "Late Cretaceous",
+            "fact": ["Actually a flying reptile, the Pteranodon is not a dinosaur.",
+                "Pteranodon's wing-span is longer than that of any known bird",
+                "It had a crest on its head, no teeth at all, and a very short tail"]
+        },
+        {
+            "species": "Pigeon",
+            "weight": 0.5,
+            "height": 9,
+            "diet": "herbavor",
+            "where": "World Wide",
+            "when": "Holocene",
+            "fact": ["All birds are living dinosaurs."]
+        }
+    ]
+}
