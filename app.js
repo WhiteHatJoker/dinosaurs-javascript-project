@@ -8,6 +8,14 @@
         this.where = where;
         this.facts = facts;
         this.diet = diet;
+
+
+        // Create Dino Compare Height Method
+        this.compareDinoHeight = function(humanHeight) {
+            let difference = this.height - humanHeight;
+            let newFact = `${this.species} were ${Math.abs(difference)} inches ${difference>=0 ? 'higher' : 'smaller'} than you`;
+            return newFact;
+        }
     }
 
     // An array to hold javascript dinosaur objects
@@ -26,21 +34,6 @@
 
 
 
-
-
-
-    // Create Dino Compare Method 1
-    // NOTE: Weight in JSON file is in lbs, height in inches. 
-
-    
-    // Create Dino Compare Method 2
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-
-    
-    // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
-
-
     // Generate Tiles for each Dino in Array
   
         // Add tiles to DOM
@@ -55,12 +48,12 @@ document.querySelector('#dino-compare #btn').onclick = function() {
 
     // Create Human Object and use IIFE to get the human data from the form
     let human = (function() {
-        let human = {};
-        human.name = document.getElementById('name').value;
-        human.height = document.getElementById('feet').value;
-        human.weight = document.getElementById('weight').value;
-        human.diet = document.getElementById('diet').value;
-        return human;
+        let humanObj = {};
+        humanObj.name = document.getElementById('name').value;
+        humanObj.height = document.getElementById('feet').value*12+document.getElementById('inches').value;
+        humanObj.weight = document.getElementById('weight').value;
+        humanObj.diet = document.getElementById('diet').value;
+        return humanObj;
     })();
     console.log(human);
     getDinos();
