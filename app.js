@@ -18,14 +18,14 @@
         }
 
         // Create Dino Compare Weight Method
-        this.compareDinoHeight = function(humanWeight) {
+        this.compareDinoWeight = function(humanWeight) {
             let difference = this.weight - humanWeight;
             let newFact = `${this.species} were ${Math.abs(difference)} pounds ${difference>=0 ? 'heavier' : 'lighter'} than you`;
             return newFact;
         }
 
         // Create Dino Compare Diet Method
-        this.compareDinoHeight = function(humanDiet) {
+        this.compareDinoDiet = function(humanDiet) {
             let sameDiet = this.diet == humanDiet;
             let newFact = '';
             if (sameDiet) {
@@ -41,12 +41,17 @@
     // An array to hold javascript dinosaur objects
     let dinosaurs = [];
     // Push to the above array of Dino Objects from fetched json file
-    function getDinos() {
+    function getDinos(humanHeight, humanWeight, humanDiet) {
         fetch('./dino.json')
         .then(res => res.json())
         .then(data => {
             data.Dinos.forEach(dino => {
-               dinosaurs.push(new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts));
+               let newDino = new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts);
+                // Add 3 more facts to each js object
+               newDino.facts.push(newDino.compareDinoHeight(humanHeight));
+               newDino.facts.push(newDino.compareDinoWeight(humanWeight));
+               newDino.facts.push(newDino.compareDinoDiet(humanDiet));
+               dinosaurs.push(newDino);
             });
         })
         .catch(err => console.error(err));
@@ -72,11 +77,11 @@ document.querySelector('#dino-compare #btn').onclick = function() {
         humanObj.name = document.getElementById('name').value;
         humanObj.height = document.getElementById('feet').value*12+document.getElementById('inches').value;
         humanObj.weight = document.getElementById('weight').value;
-        humanObj.diet = document.getElementById('diet').value;
+        humanObj.diet = document.getElementById('diet').value.toLowerCase();;
         return humanObj;
     })();
     console.log(human);
-    getDinos();
+    getDinos(human.height, human.weight, human.diet);
     console.log(dinosaurs);
 
     hideForm();
