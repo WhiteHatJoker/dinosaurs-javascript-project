@@ -9,9 +9,10 @@
         this.facts = facts;
         this.diet = diet;
     }
-    
-    // Create Dino Objects
 
+ 
+    
+    // Create an array of Dino Objects from fetched json file
     let dinos = [];
 
     fetch('./dino.json')
@@ -23,12 +24,8 @@
     })
     .catch(err => console.error(err));
 
-    
 
 
-    // Create Human Object
-
-    // Use IIFE to get human data from form
 
 
     // Create Dino Compare Method 1
@@ -53,9 +50,17 @@
     }
 
 // On button click, prepare and display infographic
+document.querySelector('#dino-compare #btn').onclick = function() {
 
-const dinoFormSubmitButton = document.querySelector('#dino-compare #btn');
-dinoFormSubmitButton.onclick = function() {
+    // Create Human Object
+    let human = {}
+    // Use IIFE to get and store human data from form
+    (function() {
+        human.name = document.getElementById('name').value;
+        human.height = document.getElementById('feet').value;
+        human.weight = document.getElementById('weight').value;
+        human.diet = document.getElementById('diet').value;
+    })();
+    console.log(human);
     hideForm();
-    console.log('I am here 2');
 };
