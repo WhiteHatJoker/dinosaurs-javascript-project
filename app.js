@@ -16,6 +16,26 @@
             let newFact = `${this.species} were ${Math.abs(difference)} inches ${difference>=0 ? 'higher' : 'smaller'} than you`;
             return newFact;
         }
+
+        // Create Dino Compare Weight Method
+        this.compareDinoHeight = function(humanWeight) {
+            let difference = this.weight - humanWeight;
+            let newFact = `${this.species} were ${Math.abs(difference)} pounds ${difference>=0 ? 'heavier' : 'lighter'} than you`;
+            return newFact;
+        }
+
+        // Create Dino Compare Diet Method
+        this.compareDinoHeight = function(humanDiet) {
+            let sameDiet = this.diet == humanDiet;
+            let newFact = '';
+            if (sameDiet) {
+                newFact = `${this.species} and you had the same diet. You both had a ${humanDiet} diet.`
+            } else {
+                newFact = `${this.species} and you had a completely different diet. ${this.species} preferred to be ${this.diet} while you prefer the ${humanDiet} diet.`
+            }
+            return newFact;
+        }
+
     }
 
     // An array to hold javascript dinosaur objects
