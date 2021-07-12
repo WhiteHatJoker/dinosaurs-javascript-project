@@ -51,7 +51,7 @@
     function createDinoObj(dinos, human){
         dinos.Dinos.forEach((dino) => {
             let newDino = new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts);
-            // Add 3 more facts to each js object if not pigeon species
+            // Add 3 more facts to each js object if not pigeon
             if (dino.species != "Pigeon") {
                 newDino.facts.push(newDino.compareDinoHeight(human.height));
                 newDino.facts.push(newDino.compareDinoWeight(human.weight));
@@ -81,8 +81,8 @@
     }
 
 // On button click, prepare and display infographic
-const btn = document.querySelector('#dino-compare #btn');
-btn.addEventListener('click', async (e) => {
+document.querySelector('#dino-compare #btn').onclick = function() {
+
     // Create Human Object and use IIFE to get the human data from the form
     let human = (function() {
         let humanObj = {};
@@ -99,5 +99,8 @@ btn.addEventListener('click', async (e) => {
     // Add tiles to DOM
     dinosaurs.forEach(createGridItems);
     document.getElementById('grid').innerHTML = htmlContent;
+    
+    
+
     // hideForm();
-  });
+};
