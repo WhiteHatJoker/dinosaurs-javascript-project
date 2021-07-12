@@ -38,26 +38,31 @@
 
     }
 
-    // An array to hold javascript dinosaur objects
-    let dinosaurs = [];
-    // Push to the above array Dino js Objects from fetched json file
-    function getDinos(humanHeight, humanWeight, humanDiet) {
-        fetch('./dino.json')
-        .then(res => res.json())
-        .then(data => {
-            data.Dinos.forEach(dino => {
-               let newDino = new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts);
-                // Add 3 more facts to each js object
-               newDino.facts.push(newDino.compareDinoHeight(humanHeight));
-               newDino.facts.push(newDino.compareDinoWeight(humanWeight));
-               newDino.facts.push(newDino.compareDinoDiet(humanDiet));
-               dinosaurs.push(newDino);
-            });
-        })
-        .catch(err => console.error(err));
-    }
 
-    // Generate Tiles for each Dino in Array
+    // An array to hold javascript dinosaur objects
+    const dinosaurs = [];
+    // Asynchromous function to get dino.json file contents
+    async function getDinoObjectsFromJSON(human) {
+        const jsonResponse = await fetch('./dino.json'); 
+        const dinoDataFromJson = await jsonResponse.json(); 
+        createDinoObj(dinoDataFromJson, human);
+    }
+    // Creating javascript objects out of fetched json objects
+    function createDinoObj(dinos, human){
+        dinos.Dinos.forEach((dino) => {
+            let newDino = new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts);
+            // Add 3 more facts to each js object
+            newDino.facts.push(newDino.compareDinoHeight(human.height));
+            newDino.facts.push(newDino.compareDinoWeight(human.weight));
+            newDino.facts.push(newDino.compareDinoDiet(human.diet));
+            // Saving an object to the global dinosaurs variable
+            dinosaurs.push(newDino); 
+        })
+        // Add human object into dinosaurs array
+        dinosaurs.splice(4,0,human);
+    }
+    
+    // Generate a tile for one Dino object in Array
     let htmlContent = '';
     function createGridItems(dino) {
         const displayHumanTile = dino.species == 'Homo Sapiens';
@@ -86,9 +91,9 @@ document.querySelector('#dino-compare #btn').onclick = function() {
         humanObj.species = 'Homo Sapiens';
         return humanObj;
     })();
-    getDinos(human.height, human.weight, human.diet);
-    // Add human object into dinosaurs array
-    // dinosaurs.splice(4,0, human)
+    // Get the prepared array with javascript objects including human object and more facts inside each object
+    getDinoObjectsFromJSON(human);
+
     // Add tiles to DOM
     dinosaurs.forEach(createGridItems);
     document.getElementById('grid').innerHTML = htmlContent;
