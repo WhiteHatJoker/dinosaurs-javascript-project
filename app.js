@@ -10,21 +10,21 @@
         this.diet = diet;
 
 
-        // Create Dino Compare Height Method
+        // Compare Dino to Human Height Method
         this.compareDinoHeight = function(humanHeight) {
             let difference = this.height - humanHeight;
             let newFact = `${this.species} were ${Math.abs(difference)} inches ${difference>=0 ? 'higher' : 'smaller'} than you`;
             return newFact;
         }
 
-        // Create Dino Compare Weight Method
+        // Compare Dino to Human Weight Method
         this.compareDinoWeight = function(humanWeight) {
             let difference = this.weight - humanWeight;
             let newFact = `${this.species} were ${Math.abs(difference)} pounds ${difference>=0 ? 'heavier' : 'lighter'} than you`;
             return newFact;
         }
 
-        // Create Dino Compare Diet Method
+        // Compare Dino to Human Diet Method
         this.compareDinoDiet = function(humanDiet) {
             let sameDiet = this.diet == humanDiet;
             let newFact = '';
@@ -40,7 +40,7 @@
 
     // An array to hold javascript dinosaur objects
     let dinosaurs = [];
-    // Push to the above array of Dino Objects from fetched json file
+    // Push to the above array Dino js Objects from fetched json file
     function getDinos(humanHeight, humanWeight, humanDiet) {
         fetch('./dino.json')
         .then(res => res.json())
@@ -60,7 +60,17 @@
 
 
     // Generate Tiles for each Dino in Array
-  
+    function buildTiles() {
+        let htmlContent = '';
+        dinosaurs.forEach(dinosaur => {
+            htmlContent += createGrid(dinosaur);
+        });
+        return htmlContent;
+    }
+
+    function createGridItems(dinosaur) {
+        let dinoHtml = `<div class="grid-item"><h3>${dinosaur.species}</h3><img /><p></p></div>`
+    }
         // Add tiles to DOM
 
     // Remove form from screen
@@ -82,6 +92,8 @@ document.querySelector('#dino-compare #btn').onclick = function() {
     })();
     console.log(human);
     getDinos(human.height, human.weight, human.diet);
+    // Add human object into dinosaurs array
+    dinosaurs.splice(4,0, human)
     console.log(dinosaurs);
 
     hideForm();
