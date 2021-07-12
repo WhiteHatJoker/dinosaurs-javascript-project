@@ -57,21 +57,25 @@
         .catch(err => console.error(err));
     }
 
-
+    function createGridItems(dinosaur) {
+        const displayHumanTile = dinosaur.species == 'Homo Sapiens';
+        let dinoHtml = `<div class="grid-item"><h3>${displayHumanTile ? dinosaur.name : dinosaur.species}</h3><img />
+        <p>Height:${dinosaur.height}</p><p>Weight:${dinosaur.weight}</p>
+        ${!displayHumanTile ? '<div><p>' + dinosaur.when + '</p><p>' + dinosaur.where + '</p><p>' +dinosaur.facts[Math.floor(Math.random() * dinosaur.facts.length)] + '</p></div>' : ''}
+        <p>${dinosaur.diet}</p></div>`;
+        return dinoHtml;
+    }
+        
 
     // Generate Tiles for each Dino in Array
     function buildTiles() {
         let htmlContent = '';
         dinosaurs.forEach(dinosaur => {
-            htmlContent += createGrid(dinosaur);
+            htmlContent += createGridItems(dinosaur);
         });
         return htmlContent;
     }
 
-    function createGridItems(dinosaur) {
-        let dinoHtml = `<div class="grid-item"><h3>${dinosaur.species}</h3><img /><p></p></div>`
-    }
-        // Add tiles to DOM
 
     // Remove form from screen
     function hideForm() {
@@ -88,13 +92,15 @@ document.querySelector('#dino-compare #btn').onclick = function() {
         humanObj.height = document.getElementById('feet').value*12+document.getElementById('inches').value;
         humanObj.weight = document.getElementById('weight').value;
         humanObj.diet = document.getElementById('diet').value.toLowerCase();;
+        humanObj.species = 'Homo Sapiens';
         return humanObj;
     })();
-    console.log(human);
     getDinos(human.height, human.weight, human.diet);
     // Add human object into dinosaurs array
     dinosaurs.splice(4,0, human)
     console.log(dinosaurs);
+    // Add tiles to DOM
+    document.getElementById('grid').innerHTML = buildTiles();
 
     hideForm();
 };
