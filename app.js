@@ -57,26 +57,17 @@
         .catch(err => console.error(err));
     }
 
-    function createGridItems(dinosaur) {
-        const displayHumanTile = dinosaur.species == 'Homo Sapiens';
-        let dinoHtml = `<div class="grid-item"><h3>${displayHumanTile ? dinosaur.name : dinosaur.species}</h3><img />
-        <p>Height:${dinosaur.height}</p><p>Weight:${dinosaur.weight}</p>
-        ${!displayHumanTile ? '<div><p>' + dinosaur.when + '</p><p>' + dinosaur.where + '</p><p>' +dinosaur.facts[Math.floor(Math.random() * dinosaur.facts.length)] + '</p></div>' : ''}
-        <p>${dinosaur.diet}</p></div>`;
-        return dinoHtml;
+    // Generate Tiles for each Dino in Array
+    let htmlContent = '';
+    function createGridItems(dino) {
+        const displayHumanTile = dino.species == 'Homo Sapiens';
+        let h3Title = '<h3>'+ (displayHumanTile ? dino.name : dino.species) + '</h3>';
+        let heightPara = '<p>Height:' + dino.height + '</p>';
+        let weightPara = '<p>Weight:' + dino.weight + '</p>';
+        let dietPara = '<p>Diet:' + dino.diet + '</p>';
+        htmlContent = htmlContent + '<div class="grid-item">'+ h3Title + heightPara + weightPara + dietPara + (!displayHumanTile ? '<div><p>' + dino.when + '</p><p>' + dino.where + '</p><p>' + dino.facts[Math.floor(Math.random() * dino.facts.length)] + '</p></div>' : '') + '</div>';
     }
         
-
-    // Generate Tiles for each Dino in Array
-    function buildTiles() {
-        let htmlContent = '';
-        dinosaurs.forEach(dinosaur => {
-            htmlContent += createGridItems(dinosaur);
-        });
-        return htmlContent;
-    }
-
-
     // Remove form from screen
     function hideForm() {
         document.getElementById('dino-compare').style.display = 'none';
@@ -97,10 +88,12 @@ document.querySelector('#dino-compare #btn').onclick = function() {
     })();
     getDinos(human.height, human.weight, human.diet);
     // Add human object into dinosaurs array
-    dinosaurs.splice(4,0, human)
-    console.log(dinosaurs);
+    // dinosaurs.splice(4,0, human)
     // Add tiles to DOM
-    document.getElementById('grid').innerHTML = buildTiles();
+    dinosaurs.forEach(createGridItems);
+    document.getElementById('grid').innerHTML = htmlContent;
+    
+    
 
-    hideForm();
+    // hideForm();
 };
