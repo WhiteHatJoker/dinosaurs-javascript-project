@@ -172,3 +172,12 @@ select {
     display: block;
     font-size: 0.7em;
 }
+
+#new-infographic {
+    display: none;
+    margin: 0 auto;
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 7px;
+}

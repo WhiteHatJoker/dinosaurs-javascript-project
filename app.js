@@ -3,6 +3,7 @@
     const submitButton = document.querySelector('#dino-compare #btn');
     const mainGrid = document.getElementById('grid');
     const mainForm = document.getElementById('dino-compare');
+    const newInfoButton = document.getElementById('new-infographic');
     
     // An array to hold javascript dinosaur objects
     const dinosaurs = [];
@@ -120,6 +121,7 @@
     // Remove form from screen
     function hideForm() {
         mainForm.style.display = 'none';
+        newInfoButton.style.display = 'block';
     }
 
 // On button click, prepare and display infographic
@@ -138,5 +140,11 @@ submitButton.onclick = function() {
     // Add tiles to DOM
     mainGrid.innerHTML = getHtml();
     
+    // Hide the form and display generate a new infographic button
     hideForm();
 };
+
+// on generate a new infograpich button click, reload the page
+newInfoButton.onclick = function() {
+    location.reload();
+}
