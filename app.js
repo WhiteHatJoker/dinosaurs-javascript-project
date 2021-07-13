@@ -115,7 +115,6 @@
     function getHtml() {
         let htmlContent = '';
         randomizeArray();
-        console.log(dinosaurs);
         dinosaurs.forEach(dino => {
             (dino.species.toLowerCase() != "human") ? dino.addToFacts() : '';
             htmlContent += dino.buildTile();
