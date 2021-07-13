@@ -2,8 +2,9 @@
     // Important html element selectors
     const submitButton = document.querySelector('#dino-compare #btn');
     const mainGrid = document.getElementById('grid');
+    const mainForm = document.getElementById('dino-compare');
     
-    // Create Dino Constructor
+    // Dino Class Constructor
     class Dino {
         constructor(species, height, weight, diet, when, where, facts) {
             this.species = species;
@@ -45,8 +46,12 @@
             return 'images' + this.species.toLowerCase() + ".png";
         }
 
-        addToFacts() {
-         // don't forget to check if pigeon or maybe human
+        addToFacts(humanWeight, humanHeight, humanDiet) {
+            if ((this.species.toLowerCase() != "pigeon") || (this.species.toLowerCase() != "human")) {
+                this.facts.push(this.compareDinoHeight(humanHeight));
+                this.facts.push(this.compareDinoWeight(humanWeight));
+                this.facts.push(this.compareDinoDiet(humanDiet));
+            }
         }
 
         buildTile() {
@@ -63,28 +68,15 @@
 
     // An array to hold javascript dinosaur objects
     const dinosaurs = [];
-    // Asynchromous function to get dino.json file contents
-    async function getDinoObjectsFromJSON(human) {
-        const jsonResponse = await fetch('./dino.json'); 
-        const dinoDataFromJson = await jsonResponse.json(); 
-        createDinoObj(dinoDataFromJson, human);
-    }
+    // Get dino.json file contents and save them to an array of objects
+    const jsonResponse = await fetch('./dino.json'); 
+    const dinoDataFromJson = await jsonResponse.json(); 
     // Creating javascript objects out of fetched json objects
-    function createDinoObj(dinos, human){
-        dinos.Dinos.forEach((dino) => {
-            let newDino = new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts);
-            // Add 3 more facts to each js object if not pigeon
-            if (dino.species != "Pigeon") {
-                newDino.facts.push(newDino.compareDinoHeight(human.height));
-                newDino.facts.push(newDino.compareDinoWeight(human.weight));
-                newDino.facts.push(newDino.compareDinoDiet(human.diet));
-            }
-            // Saving an object to the global dinosaurs variable
-            dinosaurs.push(newDino); 
-        })
-        // Add human object into dinosaurs array
-        dinosaurs.splice(4,0,human);
-    }
+    dinos.Dinos.forEach((dino) => {
+        // Saving an object to the global dinosaurs variable
+        dinosaurs.push(new Dino(dino.species, dino.height, dino.weight, dino.diet, dino.when, dino.where, dino.facts)); 
+    });
+
     
     // Generate ready html grid tiles from dino objects
     function getHtml() {
@@ -97,7 +89,7 @@
         
     // Remove form from screen
     function hideForm() {
-        document.getElementById('dino-compare').style.display = 'none';
+        mainForm.style.display = 'none';
     }
 
 // On button click, prepare and display infographic
@@ -113,6 +105,9 @@ submitButton.onclick = function() {
         humanObj.species = 'Human';
         return humanObj;
     })();
+    // after we create human add comparison methods and then facts and splice
+            // Add human object into dinosaurs array
+            // dinosaurs.splice(4,0,human);
     // Get the prepared array with javascript objects including human object and more facts inside each object
     getDinoObjectsFromJSON(human);
 
