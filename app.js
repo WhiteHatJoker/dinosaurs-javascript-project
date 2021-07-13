@@ -27,7 +27,7 @@
 
         // Compare Dino to Human Diet Method
         compareDinoDiet(humanDiet) {
-            let sameDiet = this.diet == humanDiet;
+            let sameDiet = this.diet.toLowerCase() == humanDiet;
             let newFact = '';
             if (sameDiet) {
                 newFact = `${this.species} and you had the same diet. You both had a ${humanDiet} diet.`
@@ -41,7 +41,19 @@
             return 'images' + this.species.toLowerCase() + ".png";
         }
 
+        addToFacts() {
+        
+        }
 
+        buildTile() {
+            const displayHumanTile = dino.species.toLowerCase() == 'human';
+            let mainImage = '<img src="' + this.getProfilePic() +'" />';
+            let h3Title = '<h3>'+ (displayHumanTile ? dino.name : dino.species) + '</h3>';
+            let heightPara = '<p>Height:' + dino.height + '</p>';
+            let weightPara = '<p>Weight:' + dino.weight + '</p>';
+            let dietPara = '<p>Diet:' + dino.diet + '</p>';
+            return '<div class="grid-item">'+ mainImage + h3Title + heightPara + weightPara + dietPara + (!displayHumanTile ? '<div><p>' + dino.when + '</p><p>' + dino.where + '</p><p>' + dino.facts[Math.floor(Math.random() * dino.facts.length)] + '</p></div>' : '') + '</div>';
+        }
     }
     
 
@@ -71,14 +83,9 @@
     }
     
     // Generate a tile for one Dino object in Array
-    let htmlContent = '';
-    function createGridItems(dino) {
-        const displayHumanTile = dino.species == 'Human';
-        let h3Title = '<h3>'+ (displayHumanTile ? dino.name : dino.species) + '</h3>';
-        let heightPara = '<p>Height:' + dino.height + '</p>';
-        let weightPara = '<p>Weight:' + dino.weight + '</p>';
-        let dietPara = '<p>Diet:' + dino.diet + '</p>';
-        htmlContent = htmlContent + '<div class="grid-item">'+ h3Title + heightPara + weightPara + dietPara + (!displayHumanTile ? '<div><p>' + dino.when + '</p><p>' + dino.where + '</p><p>' + dino.facts[Math.floor(Math.random() * dino.facts.length)] + '</p></div>' : '') + '</div>';
+    
+    function getHtml() {
+        let htmlContent = '';
     }
         
     // Remove form from screen
@@ -103,6 +110,7 @@ document.querySelector('#dino-compare #btn').onclick = function() {
     getDinoObjectsFromJSON(human);
 
     // Add tiles to DOM
+    // (USE HTML CONTENT TO ITERATIVELY BUILD TILE)
     dinosaurs.forEach(createGridItems);
     document.getElementById('grid').innerHTML = htmlContent;
     
