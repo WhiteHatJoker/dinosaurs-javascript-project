@@ -36,6 +36,12 @@
             }
             return newFact;
         }
+
+        getProfilePic() {
+            return 'images' + this.species.toLowerCase() + ".png";
+        }
+
+
     }
     
 
@@ -67,7 +73,7 @@
     // Generate a tile for one Dino object in Array
     let htmlContent = '';
     function createGridItems(dino) {
-        const displayHumanTile = dino.species == 'Homo Sapiens';
+        const displayHumanTile = dino.species == 'Human';
         let h3Title = '<h3>'+ (displayHumanTile ? dino.name : dino.species) + '</h3>';
         let heightPara = '<p>Height:' + dino.height + '</p>';
         let weightPara = '<p>Weight:' + dino.weight + '</p>';
@@ -90,7 +96,7 @@ document.querySelector('#dino-compare #btn').onclick = function() {
         humanObj.height = document.getElementById('feet').value*12+document.getElementById('inches').value;
         humanObj.weight = document.getElementById('weight').value;
         humanObj.diet = document.getElementById('diet').value.toLowerCase();;
-        humanObj.species = 'Homo Sapiens';
+        humanObj.species = 'Human';
         return humanObj;
     })();
     // Get the prepared array with javascript objects including human object and more facts inside each object
