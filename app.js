@@ -23,7 +23,6 @@
 
         // Compare Dino to Human Height Method
         compareDinoHeight() {
-            console.log('insideclass');
             let difference = this.height - human.height;
             let newFact = `${this.species} were ${Math.abs(difference)} inches ${difference>=0 ? 'higher' : 'smaller'} than you`;
             return newFact;
@@ -75,7 +74,7 @@
             let heightPara = '<p>Height:' + this.height + '</p>';
             let weightPara = '<p>Weight:' + this.weight + '</p>';
             let dietPara = '<p>Diet:' + this.diet + '</p>';
-            return '<div class="grid-item">'+ h3Title + mainImage + heightPara + weightPara + dietPara + (!displayHumanTile ? '<div><p>' + this.when + '</p><p>' + this.where + '</p><p>' + this.randomFact() + '</p></div>' : '') + '</div>';
+            return '<div class="grid-item">'+ h3Title + mainImage + (!displayHumanTile ? '<div><p>' + this.randomFact() + '</p></div>' : '') + '</div>';
         }
     }
 
@@ -104,8 +103,6 @@
     function getHtml() {
         let htmlContent = '';
         dinosaurs.forEach(dino => {
-            // Add 3 more facts to the array
-            console.log('getht');
             (dino.species.toLowerCase() != "human") ? dino.addToFacts() : '';
             htmlContent += dino.buildTile();
         });
@@ -119,8 +116,7 @@
 
 // On button click, prepare and display infographic
 submitButton.onclick = function() {
-
-    // Create Human Object and use IIFE to get the human data from the form
+    // Use IIFE to get the human data from the form
     human = (function() {
         const name = document.getElementById('name').value;
         const height = document.getElementById('feet').value*12+document.getElementById('inches').value;
@@ -129,13 +125,10 @@ submitButton.onclick = function() {
         const species = 'Human';
         return new Human(name, height, weight, diet, species);
     })();
-    console.log(human);
     // Add human object into dinosaurs array
     dinosaurs.splice(4,0,human);
-
     // Add tiles to DOM
     mainGrid.innerHTML = getHtml();
     
-
-    // hideForm();
+    hideForm();
 };
