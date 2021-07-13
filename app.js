@@ -4,6 +4,11 @@
     const mainGrid = document.getElementById('grid');
     const mainForm = document.getElementById('dino-compare');
     const newInfoButton = document.getElementById('new-infographic');
+    const formName = document.getElementById('name');
+    const formFeet = document.getElementById('feet');
+    const formInches = document.getElementById('inches');
+    const formWeight = document.getElementById('weight');
+    const formDiet = document.getElementById('diet');
     
     // An array to hold javascript dinosaur objects
     const dinosaurs = [];
@@ -124,24 +129,48 @@
         newInfoButton.style.display = 'block';
     }
 
+    // Form validation
+    function formValidate() {
+       if( formName.value == "" ) {
+          alert( "Please provide your name!" );
+          formName.focus() ;
+          return false;
+       }
+       if((formFeet.value == "") || (formFeet.value < 0)) {
+          alert( "Feet value should not be empty or negative number!");
+          formFeet.focus() ;
+          return false;
+       }
+       if((formWeight.value == "") || (formWeight.value < 0)) {
+          alert( "Weight value should not be empty or negative number");
+          formWeight.focus();
+          return false;
+       }
+       return( true );
+    }
+
 // On button click, prepare and display infographic
 submitButton.onclick = function() {
-    // Use IIFE to get the human data from the form
-    human = (function() {
-        const name = document.getElementById('name').value;
-        const height = document.getElementById('feet').value*12+document.getElementById('inches').value;
-        const weight = document.getElementById('weight').value;
-        const diet = document.getElementById('diet').value.toLowerCase();;
-        const species = 'Human';
-        return new Human(name, height, weight, diet, species);
-    })();
-    // Add human object into dinosaurs array
 
-    // Add tiles to DOM
-    mainGrid.innerHTML = getHtml();
-    
-    // Hide the form and display generate a new infographic button
-    hideForm();
+    if (formValidate()) {
+        // Use IIFE to get the human data from the form
+        human = (function() {
+            const name = formName.value;
+            const height = formFeet.value*12+formInches.value;
+            const weight = formWeight.value;
+            const diet = formDiet.value.toLowerCase();
+            const species = 'Human';
+            return new Human(name, height, weight, diet, species);
+        })();
+        // Add human object into dinosaurs array
+
+        // Add tiles to DOM
+        mainGrid.innerHTML = getHtml();
+        
+        // Hide the form and display generate a new infographic button
+        hideForm();
+    }
+
 };
 
 // on generate a new infograpich button click, reload the page
