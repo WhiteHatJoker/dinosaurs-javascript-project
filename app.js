@@ -97,11 +97,19 @@
         });
     })();
 
-
+    // Shuffle array objects and push human
+    function randomizeArray() {
+        const pigeonObj = dinosaurs.pop();
+        dinosaurs.sort(() => Math.random() - 0.5);
+        dinosaurs.push(pigeonObj);
+        dinosaurs.splice(4,0,human);
+    }
     
     // Generate ready html grid tiles from dino objects
     function getHtml() {
         let htmlContent = '';
+        randomizeArray();
+        console.log(dinosaurs);
         dinosaurs.forEach(dino => {
             (dino.species.toLowerCase() != "human") ? dino.addToFacts() : '';
             htmlContent += dino.buildTile();
@@ -126,7 +134,7 @@ submitButton.onclick = function() {
         return new Human(name, height, weight, diet, species);
     })();
     // Add human object into dinosaurs array
-    dinosaurs.splice(4,0,human);
+
     // Add tiles to DOM
     mainGrid.innerHTML = getHtml();
     
