@@ -1,31 +1,32 @@
 
     // Create Dino Constructor
-    function Dino(species, height, weight, diet, when, where, facts) {
-        this.species = species;
-        this.height = height;
-        this.weight = weight;
-        this.when = when;
-        this.where = where;
-        this.facts = facts;
-        this.diet = diet;
-
+    class Dino {
+        constructor(species, height, weight, diet, when, where, facts) {
+            this.species = species;
+            this.height = height;
+            this.weight = weight;
+            this.when = when;
+            this.where = where;
+            this.facts = facts;
+            this.diet = diet;
+        }
 
         // Compare Dino to Human Height Method
-        this.compareDinoHeight = function(humanHeight) {
+        compareDinoHeight(humanHeight) {
             let difference = this.height - humanHeight;
             let newFact = `${this.species} were ${Math.abs(difference)} inches ${difference>=0 ? 'higher' : 'smaller'} than you`;
             return newFact;
         }
 
         // Compare Dino to Human Weight Method
-        this.compareDinoWeight = function(humanWeight) {
+        compareDinoWeight(humanWeight) {
             let difference = this.weight - humanWeight;
             let newFact = `${this.species} were ${Math.abs(difference)} pounds ${difference>=0 ? 'heavier' : 'lighter'} than you`;
             return newFact;
         }
 
         // Compare Dino to Human Diet Method
-        this.compareDinoDiet = function(humanDiet) {
+        compareDinoDiet(humanDiet) {
             let sameDiet = this.diet == humanDiet;
             let newFact = '';
             if (sameDiet) {
@@ -35,9 +36,8 @@
             }
             return newFact;
         }
-
     }
-
+    
 
     // An array to hold javascript dinosaur objects
     const dinosaurs = [];
