@@ -1,4 +1,8 @@
 
+    // Important html element selectors
+    const submitButton = document.querySelector('#dino-compare #btn');
+    const mainGrid = document.getElementById('grid');
+    
     // Create Dino Constructor
     class Dino {
         constructor(species, height, weight, diet, when, where, facts) {
@@ -42,7 +46,7 @@
         }
 
         addToFacts() {
-        
+         // don't forget to check if pigeon or maybe human
         }
 
         buildTile() {
@@ -82,10 +86,13 @@
         dinosaurs.splice(4,0,human);
     }
     
-    // Generate a tile for one Dino object in Array
-    
+    // Generate ready html grid tiles from dino objects
     function getHtml() {
         let htmlContent = '';
+        dinosaurs.forEach(dino => {
+            htmlContent += dino.buildTile();
+        });
+        return htmlContent;
     }
         
     // Remove form from screen
@@ -94,7 +101,7 @@
     }
 
 // On button click, prepare and display infographic
-document.querySelector('#dino-compare #btn').onclick = function() {
+submitButton.onclick = function() {
 
     // Create Human Object and use IIFE to get the human data from the form
     let human = (function() {
@@ -110,9 +117,7 @@ document.querySelector('#dino-compare #btn').onclick = function() {
     getDinoObjectsFromJSON(human);
 
     // Add tiles to DOM
-    // (USE HTML CONTENT TO ITERATIVELY BUILD TILE)
-    dinosaurs.forEach(createGridItems);
-    document.getElementById('grid').innerHTML = htmlContent;
+    mainGrid.innerHTML = getHtml();
     
     
 
